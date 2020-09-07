@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>rrc_example_package</name>
+  <version>1.0.0</version>
+  <description>
+      Example package for the Real Robot Challenge Submission System.
+  </description>
+
+  <maintainer email="felix.widmaier@tue.mpg.de">Felix Widmaier</maintainer>
+
+  <license>BSD 3-clause</license>
+
+  <url type="website">https://real-robot-challenge.com/</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <exec_depend>robot_fingers</exec_depend>
+  <exec_depend>robot_interfaces</exec_depend>
+
+  <export></export>
+</package>
