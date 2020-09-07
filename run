@@ -2,4 +2,4 @@
 
 # run the script via rosrun (for python scripts a simple symlink would also
 # work but using rosrun works for C++ executables as well)
-rosrun rrc_example_package move_up_and_down.py
+rosrun rrc_example_package move_up_and_down.py "$@"
