@@ -32,5 +32,8 @@ def move_up_and_down(
             if t >= episode_length - 1:
                 return
 
-        observation = frontend.get_robot_observation(t)
-        print("Finger positions: ", observation.position)
+        robot_observation = frontend.get_robot_observation(t)
+        print("Finger positions:", robot_observation.position)
+
+        camera_observation = frontend.get_camera_observation(t)
+        print("Object position:", camera_observation.object_pose.position)
