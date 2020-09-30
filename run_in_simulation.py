@@ -20,8 +20,8 @@ episode_length = 2 * 60 * 1000
 class LocalExecutionConfig:
     """Configuration for local execution."""
 
-    singularity_user_image = "challenge.sif"
-    singularity_backend_image = "challenge.sif"
+    singularity_user_image = None
+    singularity_backend_image = None
     host_output_dir = None
     robot_data_log_path = "/output/robot_data.dat"
     camera_data_log_path = "/output/camera_data.dat"
@@ -59,7 +59,7 @@ class LocalExecutionConfig:
         parser.add_argument(
             "--backend-image",
             type=str,
-            default=self.singularity_backend_image,
+            required=True,
             help="""Path to the Singularity image for the backend.""",
         )
         parser.add_argument(
