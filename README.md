@@ -3,7 +3,7 @@ Example Package for the Real Robot Challenge Submission System
 
 
 This is a basic example for a package that can be submitted to the robots of
-the Real Robot Challenge.
+the [Real Robot Challenge](https://real-robot-challenge.com).
 
 It is a normal catkin package.  The only special things are the following files
 which are used by the robot cluster system:
