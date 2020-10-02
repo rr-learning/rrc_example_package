@@ -82,8 +82,8 @@ class RealRobotCubeEnv(gym.GoalEnv):
             high=np.full(n_joints, max_torque_Nm, dtype=np.float32),
         )
         robot_position_space = gym.spaces.Box(
-            low=np.array([-0.9, -1.57, -2.7] * n_fingers, dtype=np.float32),
-            high=np.array([1.4, 1.57, 0.0] * n_fingers, dtype=np.float32),
+            low=np.array([-0.33, 0.0, -2.7] * n_fingers, dtype=np.float32),
+            high=np.array([1.0, 1.57, 0.0] * n_fingers, dtype=np.float32),
         )
         robot_velocity_space = gym.spaces.Box(
             low=np.full(n_joints, -max_velocity_radps, dtype=np.float32),
