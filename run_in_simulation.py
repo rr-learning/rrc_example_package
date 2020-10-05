@@ -268,7 +268,7 @@ class SubmissionRunner:
             "--contain",
             "--nv",  # FIXME
             "-B",
-            "/dev,/etc/trifingerpro,{}:/output".format(self.config.host_output_dir),
+            "/dev,{}:/output".format(self.config.host_output_dir),
             self.config.singularity_backend_image,
             "bash",
             "-c",
