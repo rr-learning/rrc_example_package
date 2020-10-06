@@ -1,13 +1,13 @@
 """Gym environment for the Real Robot Challenge Phase 1 (Simulation)."""
 import enum
 
-import numpy as np
 import gym
 
 import robot_interfaces
 import robot_fingers
 import trifinger_simulation
 import trifinger_simulation.visual_objects
+from trifinger_simulation import trifingerpro_limits
 from trifinger_simulation.tasks import move_cube
 
 
@@ -74,33 +74,28 @@ class RealRobotCubeEnv(gym.GoalEnv):
         # Create the action and observation spaces
         # ========================================
 
-        n_joints = 9
-        n_fingers = 3
-        max_torque_Nm = 0.36
-        max_velocity_radps = 10
-
         robot_torque_space = gym.spaces.Box(
-            low=np.full(n_joints, -max_torque_Nm, dtype=np.float32),
-            high=np.full(n_joints, max_torque_Nm, dtype=np.float32),
+            low=trifingerpro_limits.robot_torque.low,
+            high=trifingerpro_limits.robot_torque.high,
         )
         robot_position_space = gym.spaces.Box(
-            low=np.array([-0.33, 0.0, -2.7] * n_fingers, dtype=np.float32),
-            high=np.array([1.0, 1.57, 0.0] * n_fingers, dtype=np.float32),
+            low=trifingerpro_limits.robot_position.low,
+            high=trifingerpro_limits.robot_position.high,
         )
         robot_velocity_space = gym.spaces.Box(
-            low=np.full(n_joints, -max_velocity_radps, dtype=np.float32),
-            high=np.full(n_joints, max_velocity_radps, dtype=np.float32),
+            low=trifingerpro_limits.robot_velocity.low,
+            high=trifingerpro_limits.robot_velocity.high,
         )
 
         object_state_space = gym.spaces.Dict(
             {
                 "position": gym.spaces.Box(
-                    low=np.array([-0.3, -0.3, 0], dtype=np.float32),
-                    high=np.array([0.3, 0.3, 0.3], dtype=np.float32),
+                    low=trifingerpro_limits.object_position.low,
+                    high=trifingerpro_limits.object_position.high,
                 ),
                 "orientation": gym.spaces.Box(
-                    low=-np.ones(4, dtype=np.float32),
-                    high=np.ones(4, dtype=np.float32),
+                    low=trifingerpro_limits.object_orientation.low,
+                    high=trifingerpro_limits.object_orientation.high,
                 ),
             }
         )
@@ -111,12 +106,10 @@ class RealRobotCubeEnv(gym.GoalEnv):
 
         if self.action_type == ActionType.TORQUE:
             self.action_space = robot_torque_space
-            self._initial_action = np.zeros(n_joints, dtype=np.float32)
+            self._initial_action = trifingerpro_limits.robot_torque.default
         elif self.action_type == ActionType.POSITION:
             self.action_space = robot_position_space
-            self._initial_action = np.array(
-                [0, 0.9, -1.7] * n_fingers, dtype=np.float32
-            )
+            self._initial_action = trifingerpro_limits.robot_position.default
         elif self.action_type == ActionType.TORQUE_AND_POSITION:
             self.action_space = gym.spaces.Dict(
                 {
@@ -125,10 +118,8 @@ class RealRobotCubeEnv(gym.GoalEnv):
                 }
             )
             self._initial_action = {
-                "torque": np.zeros(n_joints, dtype=np.float32),
-                "position": np.array(
-                    [0, 0.9, -1.7] * n_fingers, dtype=np.float32
-                ),
+                "torque": trifingerpro_limits.robot_torque.default,
+                "position": trifingerpro_limits.robot_position.default,
             }
         else:
             raise ValueError("Invalid action_type")
