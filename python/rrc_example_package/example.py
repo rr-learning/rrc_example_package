@@ -21,7 +21,9 @@ def move_up_and_down(
     i = 0
     while True:
         print("Iteration {}".format(i))
-        action = robot_interfaces.trifinger.Action(position=target_positions[i % 2])
+        action = robot_interfaces.trifinger.Action(
+            position=target_positions[i % 2]
+        )
         i += 1
 
         for _ in range(500):

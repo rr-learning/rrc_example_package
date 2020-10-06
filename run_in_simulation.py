@@ -191,7 +191,10 @@ class SubmissionRunner:
         ]
         try:
             subprocess.run(
-                cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True
+                cmd,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
+                check=True,
             )
         except subprocess.CalledProcessError as e:
             raise RuntimeError(e.stdout.decode("utf-8"))
@@ -236,11 +239,16 @@ class SubmissionRunner:
             ". /setup.bash; cd /ws; catbuild",
         ]
         proc = subprocess.run(
-            build_cmd, check=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
+            build_cmd,
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
         )
 
         # store output
-        stdout_file = os.path.join(self.config.host_output_dir, "build_output.txt")
+        stdout_file = os.path.join(
+            self.config.host_output_dir, "build_output.txt"
+        )
         with open(stdout_file, "wb") as fh:
             fh.write(proc.stdout)
 
@@ -294,7 +302,9 @@ class SubmissionRunner:
 
         logging.info("Start backend")
         logging.debug(" ".join(run_backend_cmd))
-        self.backend_process = subprocess.Popen(run_backend_cmd, start_new_session=True)
+        self.backend_process = subprocess.Popen(
+            run_backend_cmd, start_new_session=True
+        )
 
         logging.info("Wait until backend is ready...")
         start_time = time.time()
@@ -394,7 +404,10 @@ class SubmissionRunner:
             # TODO make sure the user cannot spawn processes that keep running after the
             # main one terminates (probably same method as for backend should be used).
             proc = subprocess.run(
-                run_user_cmd, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+                run_user_cmd,
+                check=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
             )
             logging.info("User code terminated.")
             stdout = proc.stdout
@@ -411,8 +424,12 @@ class SubmissionRunner:
             # TODO: indicate this somehow to the user
 
         # store output
-        stdout_file = os.path.join(self.config.host_output_dir, "user_stdout.txt")
-        stderr_file = os.path.join(self.config.host_output_dir, "user_stderr.txt")
+        stdout_file = os.path.join(
+            self.config.host_output_dir, "user_stdout.txt"
+        )
+        stderr_file = os.path.join(
+            self.config.host_output_dir, "user_stderr.txt"
+        )
         with open(stdout_file, "wb") as fh:
             fh.write(stdout)
         with open(stderr_file, "wb") as fh:
@@ -452,7 +469,9 @@ class SubmissionRunner:
     def run(self):
         """Run the whole pipeline."""
         try:
-            with tempfile.TemporaryDirectory(prefix="run_submission-") as ws_dir:
+            with tempfile.TemporaryDirectory(
+                prefix="run_submission-"
+            ) as ws_dir:
                 logging.info("Use temporary workspace %s", ws_dir)
 
                 user_returncode = None
@@ -488,7 +507,11 @@ class SubmissionRunner:
                 self.config.host_output_dir, "error_report.txt"
             )
             with open(error_report_file, "w") as fh:
-                fh.write("Submission failed with the following error:\n{}\n".format(e))
+                fh.write(
+                    "Submission failed with the following error:\n{}\n".format(
+                        e
+                    )
+                )
 
 
 def main():
