@@ -76,7 +76,7 @@ class LocalExecutionConfig:
         )
         args = parser.parse_args()
 
-        self.host_output_dir = args.output_dir
+        self.host_output_dir = os.path.abspath(args.output_dir)
         self.visual = args.visualize
         self.git_repo = args.repository
         self.git_branch = args.branch
