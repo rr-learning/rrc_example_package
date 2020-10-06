@@ -6,6 +6,8 @@ import gym
 
 import robot_interfaces
 import robot_fingers
+import trifinger_simulation
+import trifinger_simulation.visual_objects
 from trifinger_simulation.tasks import move_cube
 
 
@@ -233,13 +235,13 @@ class RealRobotCubeEnv(gym.GoalEnv):
         return observation, reward, is_done, self.info
 
     def reset(self):
-        # reset is not really possible
-        if self.platform is not None:
-            raise RuntimeError(
-                "Once started, this environment cannot be reset."
-            )
+        # By changing the `_reset_*` method below you can switch between using
+        # the platform frontend, which is needed for the submission system, and
+        # the direct simulation, which may be more convenient if you want to
+        # pre-train locally in simulation.
+        self._reset_platform_frontend()
+        # self._reset_direct_simulation()
 
-        self.platform = robot_fingers.TriFingerPlatformFrontend()
         self.step_count = 0
 
         # need to already do one step to get initial observation
@@ -247,6 +249,43 @@ class RealRobotCubeEnv(gym.GoalEnv):
         observation, _, _, _ = self.step(self._initial_action)
 
         return observation
+
+    def _reset_platform_frontend(self):
+        """Reset the platform frontend."""
+        # reset is not really possible
+        if self.platform is not None:
+            raise RuntimeError(
+                "Once started, this environment cannot be reset."
+            )
+
+        self.platform = robot_fingers.TriFingerPlatformFrontend()
+
+    def _reset_direct_simulation(self):
+        """Reset direct simulation.
+
+        With this the env can be used without backend.
+        """
+        # set this to false to disable pyBullet's simulation
+        visualization = True
+
+        # reset simulation
+        del self.platform
+
+        # initialize simulation
+        initial_object_pose = move_cube.sample_goal(difficulty=-1)
+        self.platform = trifinger_simulation.TriFingerPlatform(
+            visualization=visualization,
+            initial_object_pose=initial_object_pose,
+        )
+
+        # visualize the goal
+        if visualization:
+            self.goal_marker = trifinger_simulation.visual_objects.CubeMarker(
+                width=0.065,
+                position=self.goal["position"],
+                orientation=self.goal["orientation"],
+                physicsClientId=self.platform.simfinger._pybullet_client_id,
+            )
 
     def seed(self, seed=None):
         """Sets the seed for this env’s random number generator.
