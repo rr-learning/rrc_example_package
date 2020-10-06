@@ -205,10 +205,6 @@ class RealRobotCubeEnv(gym.GoalEnv):
 
         reward = 0.0
         for _ in range(num_steps):
-            self.step_count += 1
-            if self.step_count > move_cube.episode_length:
-                raise RuntimeError("Exceeded number of steps for one episode.")
-
             # send action to robot
             robot_action = self._gym_action_to_robot_action(action)
             t = self.platform.append_desired_action(robot_action)
@@ -220,6 +216,11 @@ class RealRobotCubeEnv(gym.GoalEnv):
                 observation["desired_goal"],
                 self.info,
             )
+
+            self.step_count = t
+            # make sure to not exceed the episode length
+            if self.step_count >= move_cube.episode_length - 1:
+                break
 
         is_done = self.step_count == move_cube.episode_length
 
