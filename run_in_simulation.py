@@ -74,10 +74,20 @@ class LocalExecutionConfig:
             action="store_true",
             help="""Show visualization of the simulation.""",
         )
+        parser.add_argument(
+            "--nv",
+            action="store_true",
+            help="""Set the '--nv' flag when running Singularity for enabling
+                Nvidia support.  This may be needed when running with
+                visualization on a machine that uses Nvidia drivers.  See the
+                documentation of Singularity for more information.
+            """,
+        )
         args = parser.parse_args()
 
         self.host_output_dir = os.path.abspath(args.output_dir)
         self.visual = args.visualize
+        self.nv = args.nv
         self.git_repo = args.repository
         self.git_branch = args.branch
         self.singularity_backend_image = os.path.abspath(args.backend_image)
@@ -261,19 +271,27 @@ class SubmissionRunner:
             ]
         )
 
+        singularity_flags = [
+            "--cleanenv",
+            "--contain",
+            "-B",
+            "/dev,{}:/output".format(self.config.host_output_dir),
+        ]
+        if self.config.nv:
+            singularity_flags.append("--nv")
+
         run_backend_cmd = [
             self.config.singularity_binary,
             "exec",
-            "--cleanenv",
-            "--contain",
-            "--nv",  # FIXME
-            "-B",
-            "/dev,{}:/output".format(self.config.host_output_dir),
+        ]
+        run_backend_cmd += singularity_flags
+        run_backend_cmd += [
             self.config.singularity_backend_image,
             "bash",
             "-c",
             ". /setup.bash; {}".format(backend_rosrun_cmd),
         ]
+
         logging.info("Start backend")
         logging.debug(" ".join(run_backend_cmd))
         self.backend_process = subprocess.Popen(run_backend_cmd, start_new_session=True)
