@@ -43,7 +43,7 @@ echo
 
 
 # URL to the webserver at which the recorded data can be downloaded
-base_url=http://subrob.is.localnet/output/${username}/data
+base_url=https://robots.real-robot-challenge.com/output/${username}/data
 
 
 # Check if the file/path given as argument exists in the "data" directory of
