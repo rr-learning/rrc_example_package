@@ -3,12 +3,9 @@
 import json
 import sys
 import robot_fingers
+from trifinger_simulation.tasks import move_cube
 
 from rrc_example_package.example import move_up_and_down
-
-
-# Number of actions in one episode (1000 actions per second for two minutes)
-episode_length = 2 * 60 * 1000
 
 
 def main():
@@ -26,7 +23,7 @@ def main():
     frontend = robot_fingers.TriFingerPlatformFrontend()
 
     # move the robot
-    move_up_and_down(frontend, episode_length)
+    move_up_and_down(frontend, move_cube.episode_length)
 
     # It is possible to create custom files in "/output"
     with open("/output/hello.txt", "w") as fh:
