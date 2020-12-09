@@ -1,13 +1,13 @@
 import os
-from setuptools import setup
+import setuptools
 
 PACKAGE_NAME = "rrc_example_package"
 
-setup(
+setuptools.setup(
     name=PACKAGE_NAME,
     version="2.0.0",
     # Packages to export
-    packages=[PACKAGE_NAME],
+    packages=setuptools.find_packages(),
     data_files=[
         # Include our package.xml file
         (os.path.join("share", PACKAGE_NAME), ["package.xml"]),
