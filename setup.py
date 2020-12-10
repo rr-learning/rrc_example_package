@@ -9,6 +9,8 @@ setuptools.setup(
     # Packages to export
     packages=setuptools.find_packages(),
     data_files=[
+        # Install "marker" file in package index
+        ('share/ament_index/resource_index/packages', ['resource/' + PACKAGE_NAME]),
         # Include our package.xml file
         (os.path.join("share", PACKAGE_NAME), ["package.xml"]),
     ],
