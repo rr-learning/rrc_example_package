@@ -8,7 +8,7 @@ from rrc_example_package.example import move_up_and_down
 
 
 # Number of actions in one episode (1000 actions per second for two minutes)
-episode_length = 2 * 60 * 1000
+episode_length = 20000
 
 
 def main():
