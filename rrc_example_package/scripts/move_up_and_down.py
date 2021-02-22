@@ -23,7 +23,7 @@ def main():
     frontend = robot_fingers.TriFingerPlatformFrontend()
 
     # move the robot
-    move_up_and_down(frontend, move_cube.episode_length)
+    move_up_and_down(frontend, 20000)
 
     # It is possible to create custom files in "/output"
     with open("/output/hello.txt", "w") as fh:
