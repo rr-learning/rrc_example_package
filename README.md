@@ -5,9 +5,39 @@ Example Package for the Real Robot Challenge
 This is a basic example for a package that can be submitted to the robots of
 the [Real Robot Challenge](https://real-robot-challenge.com).
 
-It is a normal ROS2 Python package that can be build with colcon.  The only
-special things are the following files which are used by the robot cluster
-system:
+It is a normal ROS2 Python package that can be build with colcon.  However,
+there are a few special files in the root directory that are needed for
+running/evaluating your submissions.  See the sections on the different
+challenge phases below for more on this.
+
+This example uses purely Python, however, any package type that can be built
+by colcon is okay.  So you can, for example, turn it into a CMake package if you
+want to build C++ code.  For more information on this, see the [ROS2
+documentation](https://docs.ros.org/en/foxy/Tutorials/Creating-Your-First-ROS2-Package.html).
+
+
+Challenge Simulation Phase
+--------------------------
+
+For evaluation of the simulation phase (phase 1) of the challenge, the critical
+file is the `evaluate_policy.py` at the root directory of the package.  This is
+what is going to be executed by `rrc_evaluate_phase1.py` (found in `scripts/`).
+
+For more information, see XXX
+FIXME: add link to challenge documentation.
+
+`evaluate_policy.py` is only used for the simulation phase and not relevant
+anymore for the later phases that use the real robot.
+
+
+Challenge Real Robot Phases
+---------------------------
+
+For the phases 2 and 3 on the real robots, you need to provide the following
+files at the root directory of the package such that your jobs can executed on
+the robots:
+
+FIXME: update this for RRC2021
 
 - `goal.json`:  Contains the desired difficulty level and optionally a specific
   goal.  In the given example, the goal is "commented out" by changing the key
@@ -21,14 +51,8 @@ system:
   executables.  When executed, the difficulty level and the goal pose of the
   object are passed as arguments.
 
-This example uses purely Python, however, any package type that can be handled
-by colcon can be used.  So you can, for example, turn it into a CMake package if
-you want to build C++ code.  For more information on this, see the [ROS2
-documentation](https://docs.ros.org/en/foxy/Tutorials/Creating-Your-First-ROS2-Package.html).
 
-
-Scripts need to be executable
------------------------------
+### `run` needs to be executable
 
 It is important that the `run` script is executable as is.  For this, you need
 to do two things:
@@ -37,5 +61,5 @@ to do two things:
    using Python or `#!/bin/bash` when using bash).
 2. Mark the file as executable (e.g. with `chmod a+x run`).
 
-When inside of `run` you want to call another script using `rosrun` (as it is
+When inside of `run` you want to call another script using `ros2 run` (as it is
 done in this example), this other script needs to fulfil the same requirements.
