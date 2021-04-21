@@ -1,7 +1,6 @@
 Example Package for the Real Robot Challenge
 ============================================
 
-
 This is a basic example for a package that can be submitted to the robots of
 the [Real Robot Challenge](https://real-robot-challenge.com).
 
@@ -33,17 +32,13 @@ anymore for the later phases that use the real robot.
 Challenge Real Robot Phases
 ---------------------------
 
-For the phases 2 and 3 on the real robots, you need to provide the following
+For the challenge phases on the real robots, you need to provide the following
 files at the root directory of the package such that your jobs can executed on
 the robots:
 
-FIXME: update this for RRC2021
-
-- `goal.json`:  Contains the desired difficulty level and optionally a specific
-  goal.  In the given example, the goal is "commented out" by changing the key
-  name.  If no goal is given, a random one is sampled based on the specified
-  difficulty level.  Note that the difficulty level is always needed, also if a
-  specific goal is given, as it is needed for computing the reward.
+- `goal.json`:  May contain some configuration for sampling random goals or a
+  fixed goal (might be useful for testing/training).  See the documentation of
+  the challenge tasks for more details.
 - `run`:  Script that is executed when submitting the package to the robot.
   This can, for example, be a Python script or a symlink to a script somewhere
   else inside the repository.  In the given example, it is a shell script
@@ -51,11 +46,8 @@ FIXME: update this for RRC2021
   executables.  When executed, the difficulty level and the goal pose of the
   object are passed as arguments.
 
-
-### `run` needs to be executable
-
-It is important that the `run` script is executable as is.  For this, you need
-to do two things:
+It is important that the `run` script is executable.  For this, you need to do
+two things:
 
 1. Add a shebang line at the top of the file (e.g. `#!/usr/bin/python3` when
    using Python or `#!/bin/bash` when using bash).
