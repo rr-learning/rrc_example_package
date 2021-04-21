@@ -13,6 +13,8 @@ import logging
 import pathlib
 import sys
 
+# FIXME: This is not up-to-date anymore!
+
 
 episode_length = 2 * 60 * 1000
 
