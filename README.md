@@ -1,12 +1,13 @@
-Example Package for the Real Robot Challenge Submission System
-==============================================================
+Example Package for the Real Robot Challenge
+============================================
 
 
 This is a basic example for a package that can be submitted to the robots of
 the [Real Robot Challenge](https://real-robot-challenge.com).
 
-It is a normal catkin package.  The only special things are the following files
-which are used by the robot cluster system:
+It is a normal ROS2 Python package that can be build with colcon.  The only
+special things are the following files which are used by the robot cluster
+system:
 
 - `goal.json`:  Contains the desired difficulty level and optionally a specific
   goal.  In the given example, the goal is "commented out" by changing the key
@@ -16,13 +17,14 @@ which are used by the robot cluster system:
 - `run`:  Script that is executed when submitting the package to the robot.
   This can, for example, be a Python script or a symlink to a script somewhere
   else inside the repository.  In the given example, it is a shell script
-  running a Python script via `rosrun`.  This approach would also work for C++
+  running a Python script via `ros2 run`.  This approach would also work for C++
   executables.  When executed, the difficulty level and the goal pose of the
   object are passed as arguments.
 
-This example uses purely Python but you could also add C++ code.  In this case
-you need to add the corresponding build commands in `CMakeLists.txt` (and
-potentially specify dependencies in `package.xml` as for any catkin package.
+This example uses purely Python, however, any package type that can be handled
+by colcon can be used.  So you can, for example, turn it into a CMake package if
+you want to build C++ code.  For more information on this, see the [ROS2
+documentation](https://docs.ros.org/en/foxy/Tutorials/Creating-Your-First-ROS2-Package.html).
 
 
 Scripts need to be executable
