@@ -9,15 +9,10 @@ from rrc_example_package.example import move_up_and_down
 
 
 def main():
-    # the difficulty level and the goal pose (as JSON string) are passed as
-    # arguments
-    difficulty = int(sys.argv[1])
-    goal_pose_json = sys.argv[2]
-    goal = json.loads(goal_pose_json)
-    print(
-        "Goal: %s/%s (difficulty: %d)"
-        % (goal["position"], goal["orientation"], difficulty)
-    )
+    # the goal is passed as JSON string
+    goal_json = sys.argv[1]
+    goal = json.loads(goal_json)
+    print("Goal: %s" % goal)
 
     # create the robot frontend
     frontend = robot_fingers.TriFingerPlatformFrontend()
