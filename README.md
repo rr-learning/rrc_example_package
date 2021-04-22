@@ -43,8 +43,8 @@ the robots:
   This can, for example, be a Python script or a symlink to a script somewhere
   else inside the repository.  In the given example, it is a shell script
   running a Python script via `ros2 run`.  This approach would also work for C++
-  executables.  When executed, the difficulty level and the goal pose of the
-  object are passed as arguments.
+  executables.  When executed, a JSON string encoding the goal is passed as
+  argument (the exact structure of the goal depends on the current task).
 
 It is important that the `run` script is executable.  For this, you need to do
 two things:

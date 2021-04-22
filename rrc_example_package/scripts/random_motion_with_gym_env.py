@@ -21,14 +21,15 @@ class RandomPolicy:
 
 
 def main():
-    # the difficulty level and the goal pose (as JSON string) are passed as
-    # arguments
-    difficulty = int(sys.argv[1])
-    goal_pose_json = sys.argv[2]
-    goal = json.loads(goal_pose_json)
+    # the goal is passed as JSON string
+    goal_json = sys.argv[1]
+    goal = json.loads(goal_json)
 
     env = cube_env.RealRobotCubeEnv(
-        goal, difficulty, cube_env.ActionType.POSITION, frameskip=200
+        goal["goal"],
+        goal["difficulty"],
+        cube_env.ActionType.POSITION,
+        frameskip=200
     )
     policy = RandomPolicy(env.action_space)
 
