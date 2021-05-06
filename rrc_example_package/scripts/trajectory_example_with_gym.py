@@ -2,7 +2,7 @@
 """Demo on how to run the robot using the Gym environment
 
 This demo creates a RealRobotCubeTrajectoryEnv environment and runs one episode
-using a dummy policy which uses random actions.
+using a dummy policy.
 """
 import json
 import sys

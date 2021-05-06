@@ -32,6 +32,7 @@ setuptools.setup(
         "console_scripts": [
             "move_up_and_down = rrc_example_package.scripts.move_up_and_down:main",
             "trajectory_example_with_gym = rrc_example_package.scripts.trajectory_example_with_gym:main",
+            "dice_example_with_gym = rrc_example_package.scripts.dice_example_with_gym:main",
         ],
     },
 )
