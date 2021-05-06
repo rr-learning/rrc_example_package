@@ -395,7 +395,9 @@ class SubmissionRunner:
             "--cleanenv",
             "--contain",
             "-B",
-            "{}:/ws,/dev,/run,{}:/output".format(workspace_path, user_output_dir),
+            "{}:/ws,/dev,/run,{}:/output".format(
+                workspace_path, user_output_dir
+            ),
             self.config.singularity_user_image,
             "bash",
             "-c",

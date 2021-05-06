@@ -10,7 +10,10 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     data_files=[
         # Install "marker" file in package index
-        ('share/ament_index/resource_index/packages', ['resource/' + PACKAGE_NAME]),
+        (
+            "share/ament_index/resource_index/packages",
+            ["resource/" + PACKAGE_NAME],
+        ),
         # Include our package.xml file
         (os.path.join("share", PACKAGE_NAME), ["package.xml"]),
     ],
@@ -28,7 +31,7 @@ setuptools.setup(
     entry_points={
         "console_scripts": [
             "move_up_and_down = rrc_example_package.scripts.move_up_and_down:main",
-            "random_motion_with_gym_env = rrc_example_package.scripts.random_motion_with_gym_env:main",
+            "trajectory_example_with_gym = rrc_example_package.scripts.trajectory_example_with_gym:main",
         ],
     },
 )

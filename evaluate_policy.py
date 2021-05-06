@@ -23,9 +23,8 @@ evaluate the actual performance of the policy.
 import argparse
 import json
 
-import gym
-
-from trifinger_simulation.gym_wrapper.envs import cube_trajectory_env
+from rrc_example_package import cube_trajectory_env
+from rrc_example_package.example import PointAtTrajectoryPolicy
 
 
 class RandomPolicy:
@@ -53,22 +52,19 @@ def main():
     )
     args = parser.parse_args()
 
-    # create a FixedInitializer with the given trajectory
-    initializer = cube_trajectory_env.FixedInitializer(args.trajectory)
-
     # TODO: Replace with your environment if you used a custom one.
-    env = gym.make(
-        "trifinger_simulation.gym_wrapper:cube_trajectory-v1",
-        initializer=initializer,
+    env = cube_trajectory_env.SimCubeTrajectoryEnv(
+        goal_trajectory=args.trajectory,
         action_type=cube_trajectory_env.ActionType.POSITION,
-        # IMPORTANT: Do not enable visualisation as this will result in invalid
-        # log files (unfortunately the visualisation slightly influence the
-        # behaviour of the physics in pyBullet...).
+        # IMPORTANT: Do not enable visualisation here, as this will result in
+        # invalid log files (unfortunately the visualisation slightly influence
+        # the behaviour of the physics in pyBullet...).
         visualization=False,
     )
 
     # TODO: Replace this with your model
-    policy = RandomPolicy(env.action_space)
+    # policy = RandomPolicy(env.action_space)
+    policy = PointAtTrajectoryPolicy(env.action_space, args.trajectory)
 
     # Execute one episode.  Make sure that the number of simulation steps
     # matches with the episode length of the task.  When using the default Gym
@@ -77,9 +73,12 @@ def main():
     is_done = False
     observation = env.reset()
     accumulated_reward = 0
+    t = 0
     while not is_done:
-        action = policy.predict(observation)
+        # action = policy.predict(observation)
+        action = policy.predict(observation, t)
         observation, reward, is_done, info = env.step(action)
+        t = info["time_index"]
         accumulated_reward += reward
 
     print("Accumulated reward: {}".format(accumulated_reward))
