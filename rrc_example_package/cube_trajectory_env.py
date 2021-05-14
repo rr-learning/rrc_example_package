@@ -482,7 +482,7 @@ class RealRobotCubeTrajectoryEnv(BaseCubeTrajectoryEnv):
                 "Once started, this environment cannot be reset."
             )
 
-        self.platform = robot_fingers.TriFingerPlatformFrontend()
+        self.platform = robot_fingers.TriFingerPlatformWithObjectFrontend()
 
         # if no goal is given, sample one randomly
         if self.goal is None:

@@ -74,7 +74,7 @@ class PointAtTrajectoryPolicy:
 
 
 def move_up_and_down(
-    frontend: robot_fingers.TriFingerPlatformFrontend, episode_length: int
+    frontend: robot_fingers.TriFingerPlatformWithObjectFrontend, episode_length: int
 ):
     """Move up and down multiple times using fixed goal positions.
 

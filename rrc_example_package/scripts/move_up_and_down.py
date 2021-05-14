@@ -15,7 +15,7 @@ def main():
     print("Goal: %s" % goal)
 
     # create the robot frontend
-    frontend = robot_fingers.TriFingerPlatformFrontend()
+    frontend = robot_fingers.TriFingerPlatformWithObjectFrontend()
 
     # move the robot
     move_up_and_down(frontend, move_cube.episode_length)
