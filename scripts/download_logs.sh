@@ -58,7 +58,7 @@ then
 
     # Download data.  Here only the report file is downloaded as example.  Add
     # equivalent commands for other files as needed.
-    for file in report.json info.json robot_data.dat camera_data.dat camera60.yml camera180.yml camera300.yml
+    for file in report.json info.json goal.json robot_data.dat camera_data.dat camera60.yml camera180.yml camera300.yml
     do
         curl --user ${username}:${password} -o "${job_dir}/${file}" ${base_url}/${job_id}/${file}
     done
