@@ -171,8 +171,7 @@ class RealRobotRearrangeDiceEnv(gym.GoalEnv):
             a single seed, so the list contains only one element.
         """
         self.np_random, seed = gym.utils.seeding.np_random(seed)
-        # FIXME make this more generic?
-        # task.move_cube.random = self.np_random
+        task.seed(seed)
         return [seed]
 
     def _create_observation(self, t, action):
