@@ -22,8 +22,7 @@ For evaluation of the simulation phase (phase 1) of the challenge, the critical
 file is the `evaluate_policy.py` at the root directory of the package.  This is
 what is going to be executed by `rrc_evaluate_phase1.py` (found in `scripts/`).
 
-For more information, see XXX
-FIXME: add link to challenge documentation.
+For more information, see https://people.tuebingen.mpg.de/felixwidmaier/rrc2021/
 
 `evaluate_policy.py` is only used for the simulation phase and not relevant
 anymore for the later phases that use the real robot.
