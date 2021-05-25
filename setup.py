@@ -30,8 +30,10 @@ setuptools.setup(
     # scripts here.
     entry_points={
         "console_scripts": [
-            "move_up_and_down = rrc_example_package.scripts.move_up_and_down:main",
-            "trajectory_example_with_gym = rrc_example_package.scripts.trajectory_example_with_gym:main",
+            "real_move_up_and_down = rrc_example_package.scripts.real_move_up_and_down:main",
+            "sim_move_up_and_down = rrc_example_package.scripts.sim_move_up_and_down:main",
+            "real_trajectory_example_with_gym = rrc_example_package.scripts.real_trajectory_example_with_gym:main",
+            "sim_trajectory_example_with_gym = rrc_example_package.scripts.sim_trajectory_example_with_gym:main",
             "dice_example_with_gym = rrc_example_package.scripts.dice_example_with_gym:main",
         ],
     },

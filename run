@@ -3,6 +3,6 @@
 # run the script via `ros2 run` (for python scripts a simple symlink would also
 # work but using `ros2 run` works for C++ executables as well)
 
-# ros2 run rrc_example_package trajectory_example_with_gym "$@"
+# ros2 run rrc_example_package real_trajectory_example_with_gym "$@"
 ros2 run rrc_example_package dice_example_with_gym "$@"
-# ros2 run rrc_example_package move_up_and_down "$@"
+# ros2 run rrc_example_package real_move_up_and_down "$@"
