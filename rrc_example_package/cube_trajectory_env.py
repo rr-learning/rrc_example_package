@@ -223,7 +223,7 @@ class BaseCubeTrajectoryEnv(gym.GoalEnv):
     def _create_observation(self, t, action):
         robot_observation = self.platform.get_robot_observation(t)
         camera_observation = self.platform.get_camera_observation(t)
-        object_observation = camera_observation.object_pose
+        object_observation = camera_observation.filtered_object_pose
 
         active_goal = np.asarray(
             task.get_active_goal(self.info["trajectory"], t)
