@@ -1,5 +1,5 @@
-Example Package for the Real Robot Challenge
-============================================
+Example Package for the Real Robot Challenge 2021
+=================================================
 
 This is a basic example for a package that can be submitted to the robots of
 the [Real Robot Challenge 2021](https://real-robot-challenge.com).
@@ -15,8 +15,8 @@ want to build C++ code.  For more information on this, see the [ROS2
 documentation](https://docs.ros.org/en/foxy/Tutorials/Creating-Your-First-ROS2-Package.html).
 
 
-Challenge Simulation Phase
---------------------------
+Challenge Simulation Phase (Pre-Stage)
+--------------------------------------
 
 There are two example scripts using the simulation:
 
@@ -40,14 +40,15 @@ For evaluation of the pre-stage of the challenge, the critical file is the
 `evaluate_policy.py` at the root directory of the package.  This is what is
 going to be executed by `rrc_evaluate_prestage.py` (found in `scripts/`).
 
-For more information, see https://people.tuebingen.mpg.de/felixwidmaier/rrc2021/
+For more information, see the [challenge
+documentation](https://people.tuebingen.mpg.de/felixwidmaier/rrc2021/)
 
 `evaluate_policy.py` is only used for the simulation phase and not relevant
 anymore for the later phases that use the real robot.
 
 
-Challenge Real Robot Phases
----------------------------
+Challenge Real Robot Phases (Stages 1 and 2)
+--------------------------------------------
 
 For the challenge phases on the real robots, you need to provide the following
 files at the root directory of the package such that your jobs can executed on
