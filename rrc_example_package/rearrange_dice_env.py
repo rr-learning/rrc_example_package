@@ -10,6 +10,7 @@ import robot_fingers
 import trifinger_simulation.tasks.rearrange_dice as task
 from trifinger_simulation import trifingerpro_limits
 from trifinger_simulation.camera import load_camera_parameters
+from trifinger_cameras.utils import convert_image
 from trifinger_object_tracking.py_lightblue_segmenter import segment_image
 
 
@@ -179,7 +180,8 @@ class RealRobotRearrangeDiceEnv(gym.GoalEnv):
         camera_observation = self.platform.get_camera_observation(t)
 
         segmentation_masks = [
-            segment_image(c.image) for c in camera_observation.cameras
+            segment_image(convert_image(c.image))
+            for c in camera_observation.cameras
         ]
 
         observation = {
@@ -232,7 +234,9 @@ class RealRobotRearrangeDiceEnv(gym.GoalEnv):
             raise RuntimeError("Call `reset()` before starting to step.")
 
         if not self.action_space.contains(action):
-            raise ValueError("Given action is not contained in the action space.")
+            raise ValueError(
+                "Given action is not contained in the action space."
+            )
 
         num_steps = self.step_size
 
@@ -269,7 +273,9 @@ class RealRobotRearrangeDiceEnv(gym.GoalEnv):
     def reset(self):
         # cannot reset multiple times
         if self.platform is not None:
-            raise RuntimeError("Once started, this environment cannot be reset.")
+            raise RuntimeError(
+                "Once started, this environment cannot be reset."
+            )
 
         self.platform = robot_fingers.TriFingerPlatformFrontend()
 
