@@ -35,6 +35,7 @@ setuptools.setup(
             "real_trajectory_example_with_gym = rrc_example_package.scripts.real_trajectory_example_with_gym:main",
             "sim_trajectory_example_with_gym = rrc_example_package.scripts.sim_trajectory_example_with_gym:main",
             "dice_example_with_gym = rrc_example_package.scripts.dice_example_with_gym:main",
+            "sim_dice_example_with_gym = rrc_example_package.scripts.sim_dice_example_with_gym:main",
         ],
     },
 )
