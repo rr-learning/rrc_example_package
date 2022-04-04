@@ -66,7 +66,7 @@ function curl_check_if_exists()
 for (( i=0; i<30; i++))
 do
     echo "Submit job"
-    submit_result=$(ssh -T ${username}@subrob.is.localnet <<<submit)
+    submit_result=$(ssh -T ${username}@robots.real-robot-challenge.com <<<submit)
     job_id=$(echo ${submit_result} | grep -oP 'job\(s\) submitted to cluster \K[0-9]+')
     if [ $? -ne 0 ]
     then
