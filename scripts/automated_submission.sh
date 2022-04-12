@@ -79,7 +79,7 @@ do
     echo "Wait for job to be started"
     job_started=0
     # wait for the job to start (abort if it did not start after half an hour)
-    for (( i=0; i<30; i++))
+    for (( j=0; j<30; j++))
     do
         # Do not poll more often than once per minute!
         sleep 60
@@ -103,7 +103,7 @@ do
     # if the job did not finish 10 minutes after it started, something is
     # wrong, abort in this case
     job_finished=0
-    for (( i=0; i<15; i++))
+    for (( j=0; j<15; j++))
     do
         # Do not poll more often than once per minute!
         sleep 60
