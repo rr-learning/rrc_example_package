@@ -167,11 +167,11 @@ do
     #     git commit -am "Update parameters"
     #     git push
     #
-    # NOTE: The robot cluster system needs up to 60 seconds until the next job
+    # NOTE: The robot cluster system needs up to 1 minute until the next job
     # can be submitted after the previous one finished.  So depending how long
     # your data processing code above (if existent) takes, you may need to add
-    # a sleep here.
-    sleep 60
+    # a sleep here (sleeping for a bit more than 1 min to be on the safe side).
+    sleep 70
 
     echo
     echo "============================================================"
