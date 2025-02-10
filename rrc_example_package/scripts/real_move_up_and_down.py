@@ -9,16 +9,19 @@ from trifinger_simulation.tasks import move_cube_on_trajectory
 
 def main():
     # the goal is passed as JSON string
-    goal_json = sys.argv[1]
-    goal = json.loads(goal_json)
-    print("Goal: %s" % goal)
+    try:
+        goal_json = sys.argv[1]
+        goal = json.loads(goal_json)
+        print("Goal: %s" % goal)
+    except Exception as e:
+        print("Failed to parse goal: %s" % e)
 
     # It is possible to create custom files in "/output"
     with open("/output/hello.txt", "w") as fh:
         fh.write("Hello there!\n")
 
     # create the robot frontend
-    frontend = robot_fingers.TriFingerPlatformWithObjectFrontend()
+    frontend = robot_fingers.TriFingerPlatformFrontend()
 
     # move the robot between two fixed positions ("up" and "down")
     position_down = [-0.08, 0.84, -1.2] * 3
@@ -45,4 +48,4 @@ def main():
         print("Finger positions:", robot_observation.position)
 
         camera_observation = frontend.get_camera_observation(t)
-        print("Object position:", camera_observation.object_pose.position)
+        print("Camera timestamp:", camera_observation.cameras[0].timestamp)
